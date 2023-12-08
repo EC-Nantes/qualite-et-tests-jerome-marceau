@@ -6,6 +6,12 @@ class Board:
         self.symbols = ['x', 'o']
 
     def new_move(self, x, y):
+        if x in ['0', '1', '2'] and y in ['0', '1', '2']:
+            x = int(x)
+            y = int(y)
+        else:
+            print("Veuillez entrer des coordonnées valides")
+            return
         if self.grid[x][y] == ' ':
             self.grid[x][y] = self.symbols[self.turn]
             self.turn = 1 - self.turn
@@ -64,8 +70,11 @@ class Board:
         elif counter_o == 3:
             return 'o'
         
+        return False
+        
     def __str__(self):
         res = ""
         for line in self.grid:
-            res += f'{line[0]} {line[1]} {line[2]}' + '\n'
-        return res
+            res += f'{line[0]} | {line[1]} | {line[2]}' + '\n'
+            res += '----------' + '\n'
+        return res[:-11]
