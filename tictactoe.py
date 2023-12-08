@@ -22,56 +22,40 @@ class Board:
 
         # Check line
         for i in range(3):
-            counter_x = 0
-            counter_o = 0
-            for k in range(3):
-                if self.grid[i][k] == 'x':
-                    counter_x += 1
-                elif self.grid[i][k] == 'o':
-                    counter_o += 1
-            if counter_x == 3:
-                return 'x'
-            elif counter_o == 3:
-                return 'o'
-            
+            if self.checkLine(i):
+                return self.checkLine(i)
+
         # Check column
         for i in range(3):
-            counter_x = 0
-            counter_o = 0
-            for k in range(3):
-                if self.grid[k][i] == 'x':
-                    counter_x += 1
-                elif self.grid[k][i] == 'o':
-                    counter_o += 1
-            if counter_x == 3:
-                return 'x'
-            elif counter_o == 3:
-                return 'o'
-            
-        # Check first diagonal
-        for i, j in zip(range(3), range(3)):
-            if self.grid[i][j] == 'x':
-                counter_x += 1
-            elif self.grid[i][j] == 'o':
-                counter_o += 1
-        if counter_x == 3:
-            return 'x'
-        elif counter_o == 3:
-            return 'o'
-            
-        # Check second diagonal
-        for i, j in zip(range(3), range(2, -1, -1)):
-            if self.grid[i][j] == 'x':
-                counter_x += 1
-            elif self.grid[i][j] == 'o':
-                counter_o += 1
-        if counter_x == 3:
-            return 'x'
-        elif counter_o == 3:
-            return 'o'
+            if self.checkColumn(i):
+                return self.checkColumn(i)
+        
+        # Check diagonal
+        for i in range(2):
+            if self.checkDiagonal(i):
+                return self.checkDiagonal(i)
         
         return False
-        
+    
+    def checkLine(self, line):
+        if self.grid[line][0] == self.grid[line][1] == self.grid[line][2]:
+            return self.grid[line][0]
+        return False
+
+    def checkColumn(self, column):
+        if self.grid[0][column] == self.grid[1][column] == self.grid[2][column]:
+            return self.grid[0][column]
+        return False
+    
+    def checkDiagonal(self, diagonal):
+        if diagonal == 0:
+            if self.grid[0][0] == self.grid[1][1] == self.grid[2][2]:
+                return self.grid[0][0]
+        else:
+            if self.grid[0][2] == self.grid[1][1] == self.grid[2][0]:
+                return self.grid[0][2]
+        return False
+
     def __str__(self):
         res = ""
         for line in self.grid:
