@@ -37,17 +37,17 @@ class Board:
         
         return False
     
-    def checkLine(self, line):
+    def check_line(self, line):
         if self.grid[line][0] == self.grid[line][1] == self.grid[line][2]:
             return self.grid[line][0]
         return False
 
-    def checkColumn(self, column):
+    def check_column(self, column):
         if self.grid[0][column] == self.grid[1][column] == self.grid[2][column]:
             return self.grid[0][column]
         return False
     
-    def checkDiagonal(self, diagonal):
+    def check_diagonal(self, diagonal):
         if diagonal == 0:
             if self.grid[0][0] == self.grid[1][1] == self.grid[2][2]:
                 return self.grid[0][0]
