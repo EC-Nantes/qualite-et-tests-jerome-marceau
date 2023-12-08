@@ -42,6 +42,30 @@ class Board:
             elif counter_o == 3:
                 return 'o'
             
-        # Check diagonal
-        for 
-    
+        # Check first diagonal
+        for i, j in zip(range(3), range(3)):
+            if self.grid[i][j] == 'x':
+                counter_x += 1
+            elif self.grid[i][j] == 'o':
+                counter_o += 1
+        if counter_x == 3:
+            return 'x'
+        elif counter_o == 3:
+            return 'o'
+            
+        # Check second diagonal
+        for i, j in zip(range(3), range(2, -1, -1)):
+            if self.grid[i][j] == 'x':
+                counter_x += 1
+            elif self.grid[i][j] == 'o':
+                counter_o += 1
+        if counter_x == 3:
+            return 'x'
+        elif counter_o == 3:
+            return 'o'
+        
+    def __str__(self):
+        res = ""
+        for line in self.grid:
+            res += f'{line[0]} {line[1]} {line[2]}' + '\n'
+        return res
