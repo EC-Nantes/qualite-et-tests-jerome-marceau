@@ -6,53 +6,49 @@ class Board:
         self.symbols = ['x', 'o']
 
     def new_move(self, x, y):
-        if x in ['0', '1', '2'] and y in ['0', '1', '2']:
-            x = int(x)
-            y = int(y)
-        else:
-            print("Veuillez entrer des coordonnées valides")
-            return
         if self.grid[x][y] == ' ':
             self.grid[x][y] = self.symbols[self.turn]
             self.turn = 1 - self.turn
+            return True
         else:
             print("case déjà occupé")
+            return False
 
     def check_win(self):
 
         # Check line
         for i in range(3):
-            if self.checkLine(i):
-                return self.checkLine(i)
+            if self.check_line(i):
+                return self.check_line(i)
 
         # Check column
         for i in range(3):
-            if self.checkColumn(i):
-                return self.checkColumn(i)
+            if self.check_column(i):
+                return self.check_column(i)
         
         # Check diagonal
         for i in range(2):
-            if self.checkDiagonal(i):
-                return self.checkDiagonal(i)
+            if self.check_diagonal(i):
+                return self.check_diagonal(i)
         
         return False
     
     def check_line(self, line):
-        if self.grid[line][0] == self.grid[line][1] == self.grid[line][2]:
+        if self.grid[line][0] == self.grid[line][1] == self.grid[line][2] and self.grid[line][0] != ' ':
             return self.grid[line][0]
         return False
 
     def check_column(self, column):
-        if self.grid[0][column] == self.grid[1][column] == self.grid[2][column]:
+        if self.grid[0][column] == self.grid[1][column] == self.grid[2][column] and self.grid[0][column] != ' ':
             return self.grid[0][column]
         return False
     
     def check_diagonal(self, diagonal):
         if diagonal == 0:
-            if self.grid[0][0] == self.grid[1][1] == self.grid[2][2]:
+            if self.grid[0][0] == self.grid[1][1] == self.grid[2][2] and self.grid[0][0] != ' ':
                 return self.grid[0][0]
         else:
-            if self.grid[0][2] == self.grid[1][1] == self.grid[2][0]:
+            if self.grid[0][2] == self.grid[1][1] == self.grid[2][0] and self.grid[0][2] != ' ':
                 return self.grid[0][2]
         return False
 

@@ -6,6 +6,12 @@ if __name__ == '__main__':
         print(board)
         x = input("x: ")
         y = input("y: ")
+        while not (x in ['0', '1', '2'] and y in ['0', '1', '2']):
+            print("Veuillez entrer des coordonnées valides")
+            x = input("x: ")
+            y = input("y: ")
+        x = int(x)
+        y = int(y)
         board.new_move(y, x)
 
     print(board)
